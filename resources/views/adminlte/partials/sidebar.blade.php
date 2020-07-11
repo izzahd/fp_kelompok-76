@@ -32,6 +32,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/pertanyaansaya" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Pertanyaan Saya
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/pertanyaan/create" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>

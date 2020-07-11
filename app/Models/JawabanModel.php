@@ -24,6 +24,18 @@ class JawabanModel {
         $jawaban_baru = DB::table('jawaban')->insert($data);
         return $jawaban_baru;
     }
+
+    public static function get_by_id($id){
+        $jawaban = DB::table('jawaban')->where('id', $id)->first();
+        return $jawaban;
+    }
+
+    public static function jawaban_solver($idjawaban){
+        $jawaban = DB::table('jawaban')->where('id', $idjawaban)->update(['solver' => 1]);
+        $dataset=DB::table('jawaban')->where('id', $idjawaban)->first();
+        $item2= DB::statement("Update users set poin=poin+15 where id=".$dataset->penjawab_id.";");
+        return $jawaban;
+    }
 }
 
 ?>

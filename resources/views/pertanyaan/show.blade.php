@@ -41,6 +41,22 @@
                         </form>
                     </div>
                 </div>
+                @isset($vote_tanya)
+                    @if ($ureputate->poin > 14)
+                    <form action="/pertanyaan/downvote/{{ $pertanyaan->id }}" method="post" style="display: inline">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-success float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                    </form>
+                    @else
+                    <button class="btn btn-sm btn-success float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                    @endif
+                @endisset
+                @empty($vote_tanya)
+                <form action="/pertanyaan/vote/{{ $pertanyaan->id }}" method="post" style="display: inline">
+                    @csrf
+                <button type="submit" class="btn btn-sm btn-primary float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                </form>
+                @endempty
             </div>
         </div>
         <h3>Jawaban</h3>
@@ -78,6 +94,35 @@
                         </form>
                     </div>
                 </div>
+                @isset($vote_jawab[$item->id])
+                    @if ($ureputate->poin > 14)
+                    <form action="/jawaban/downvote/{{ $pertanyaan->id }}/{{ $item->id }}" method="post" style="display: inline">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-success float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                    </form>
+                    @else
+                    <button class="btn btn-sm btn-success float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                    @endif
+                @endisset
+                @empty($vote_jawab[$item->id])
+                <form action="/jawaban/vote/{{$pertanyaan->id}}/{{ $item->id }}" method="post" style="display: inline">
+                    @csrf
+                <button type="submit" class="btn btn-sm btn-primary float-right"><i class="fas fa-thumbs-up fa-lg"></i></button>
+                </form>
+                @endempty
+
+
+                @if ($item->solver == 1)
+                <button type="submit" class="btn btn-sm btn-success float-right" style="margin-right:1rem">Solver</button>
+                @else
+                @isset($ispenanya)
+                <form action="/jawaban/solver/{{$pertanyaan->id}}/{{ $item->id }}" method="post" style="display: inline">
+                    @csrf
+                <button type="submit" class="btn btn-sm btn-primary float-right" style="margin-right:1rem">Set Solver</button>
+                </form>
+                @endisset
+                @endif
+
             </div>
         </div>
         @endforeach

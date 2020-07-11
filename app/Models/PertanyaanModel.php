@@ -10,6 +10,12 @@ class PertanyaanModel {
         return $pertanyaan;
     }
 
+     public static function get_all_me(){
+        $id_user = Auth::id();
+        $pertanyaan = DB::table('pertanyaan')->where('penanya_id', $id_user)->get();
+        return $pertanyaan;
+    }
+
     public static function save($data){
         $id_user = Auth::id();
         $data += ["penanya_id" => $id_user];

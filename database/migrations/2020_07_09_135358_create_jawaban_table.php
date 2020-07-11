@@ -16,9 +16,10 @@ class CreateJawabanTable extends Migration
     {
         Schema::create('jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('isi');
+            $table->text('isi');
             $table->timestamp('tanggal_dibuat')->useCurrent();
             $table->timestamp('tanggal_diperbaharui')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->integer('solver')->nullable();
             $table->unsignedBigInteger('pertanyaan_id');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
             $table->unsignedBigInteger('penjawab_id');

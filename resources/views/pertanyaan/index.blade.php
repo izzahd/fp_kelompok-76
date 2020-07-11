@@ -20,12 +20,14 @@
                     <td>{!! $item->isi !!}</td>
                     <td>
                         <a href="/pertanyaan/{{ $item->id }}" class="btn btn-sm btn-primary mr-2" role="button">Lihat</a>
+                        @isset($saya)
                         <a href="/pertanyaan/{{ $item->id }}/edit" class="btn btn-sm btn-light mr-2" role="button">Ubah</a>
                         <form action="/pertanyaan/{{ $item->id }}" method="post" style="display: inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger mr-2">Hapus</button>
                         </form>
+                        @endisset
                     </td>
                 </tr>              
                 @endforeach

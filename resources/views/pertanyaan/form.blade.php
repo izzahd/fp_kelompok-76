@@ -6,22 +6,25 @@
 
 @section('content')
     <div class="mx-3 pt-3">
-        <h2>Buat Pertanyaan</h2>
-        <form action="/pertanyaan" method="POST">
+        <h2>@if (isset($pertanyaan)) Ubah @else Buat @endif Pertanyaan</h2>
+        <form action="@if (isset($pertanyaan)) /pertanyaan/{{$pertanyaan->id}} @else /pertanyaan @endif" method="POST">
             @csrf
+            @isset($pertanyaan)
+                @method('PUT')
+            @endisset
             <div class="form-group">
             <label for="judul">Judul :</label>
-            <input type="text" class="form-control" id="judul" placeholder="Judul pertanyaan" name="judul">
+            <input type="text" class="form-control" id="judul" placeholder="Judul pertanyaan" name="judul" value="{{ $pertanyaan->judul ?? ''}}">
             </div>
             <div class="form-group">
             <label for="isi">Isi :</label>
-            <textarea name="isi" class="form-control my-editor">{!! old('isi', $isi ?? '') !!}</textarea>
+            <textarea name="isi" class="form-control my-editor">{{$pertanyaan->isi ?? ''}}</textarea>
             </div>
             <div class="form-group">
             <label for="tag">Tag :</label>
-            <input type="text" class="form-control" id="tag" placeholder="Tag pertanyaan" name="tag">
+            <input type="text" class="form-control" id="tag" placeholder="Tag pertanyaan" name="tag" value="{{$pertanyaan->tag ?? ''}}">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">@if (isset($pertanyaan)) Update @else Submit @endif</button>
         </form>
     </div>
     
